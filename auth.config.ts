@@ -12,7 +12,9 @@ export const authConfig = {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn && nextUrl.pathname !== '/') {
-        return Response.redirect(new URL('/dashboard', nextUrl.origin));
+        const url = nextUrl.clone();
+        url.pathname = '/dashboard';
+        return Response.redirect(url);
       }
       return true;
     },
